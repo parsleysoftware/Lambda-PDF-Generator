@@ -5,6 +5,9 @@ provider:
   # Set environment variable for the S3 bucket
   environment:
     S3_BUCKET_NAME: ${file(./config.yml):BucketName}
+    # Set env config for fonts to help with kerning
+    FONTCONFIG_PATH: '/var/task/fonts'
+    FONTCONFIG_FILE: '/var/task/fonts/fonts.conf'
   # Gives our functions full read and write access to the S3 Bucket
   iamRoleStatements:
     -  Effect: "Allow"
@@ -28,6 +31,19 @@ resources:
      Type: AWS::S3::Bucket
      Properties:
        BucketName: ${file(./config.yml):BucketName}
+       CorsConfiguration:
+         CorsRules:
+           - AllowedMethods:
+               - GET
+               - HEAD
+             AllowedOrigins:
+               - "*"
+       LifecycleConfiguration:
+         Rules:
+           -
+             ExpirationInDays: 1
+             Prefix: '/'
+             Status: Enabled
 custom:
   pythonRequirements:
     dockerizePip: true
