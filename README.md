@@ -10,6 +10,15 @@ This repository hosts the code and content for an article I wrote about creating
 1. Set the name of your S3 bucket in the `config.yml`
 1. `serverless deploy`
 
+## Serverless IAM access
+
+Use minimum-serverless-permissions.json for serverless IAM user access
+
+## Integration
+
+Just use generated endpoint from sls deploy command in your html 2 pdf conversion app
+
+
 ## Links
 
 [Medium](https://medium.com/@_rich/richard-keller-61d9cb0f430)
